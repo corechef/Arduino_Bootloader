@@ -1,2 +1,97 @@
 # Arduino_Bootloader
-A Minimal Bootloader Implementation for Arduino Uno and Arduino Nano which use atmega328p Chip
+A Minimal bootloader implementation for Arduino Uno and Arduino Nano which uses atmega328p chip
+
+## Prerequisites
+* `avr-gcc` package
+  * On macOS, install via `brew install avr-gcc`
+  * On macOS, learn `${AVR_BIN}` directory via `brew ls avr-gcc`
+    * Example output:
+      ```
+        /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/avr/include/ (293 files)
+        /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/avr/lib/ (618 files)
+        /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin/avr-c++
+        /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin/avr-cpp
+        /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin/avr-g++
+        /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin/avr-gcc
+        /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin/avr-gcc-9.4.0
+        /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin/avr-gcc-ar
+        /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin/avr-gcc-nm
+        /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin/avr-gcc-ranlib
+        /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin/avr-gcov
+        /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin/avr-gcov-dump
+        /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin/avr-gcov-tool
+        /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin/avr-man
+        /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/lib/avr-gcc/ (791 files)
+        /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/libexec/gcc/ (13 files)
+        /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/sbom.spdx.json
+        /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/share/doc/ (20 files)
+        /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/share/man/ (6 files)
+      ```
+    * Example `${AVR_BIN}`: `/opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin`
+  * Alternatively, you can find an avr toolchain and download it for your environment via a search engine.
+    * `${AVR_BIN}` configuration is similar, just point it to the `bin` directory which includes `avr-gcc` executable.
+* `make` utility
+
+## How To Build
+You need to add `${AVR_BIN}` to your environment variables first. `AVR_BIN` is supposed to be where `avr-gcc` (and other tools) are located.
+
+### Compile
+Run `make` for a compiling the binaries. Binaries are .elf and .hex files under `bin` directory.
+
+### Clean
+Run `make clean` for cleaning artefacts of the build step
+
+### Compile and Disassemble
+Run `make disasm` for compiling the binaries, and producing their objdump files for further inspection.
+
+## IDE Configuration
+
+### Include Directory
+Depending on your avr installation you need to instruct your IDE to 'see' avr library headers. Without this, IDEs like VsCode will not help you with the headers and expressions included from avr library in this project.
+
+* on macOS, avr package library base can be found with this command: `brew ls avr-gcc`
+  * example output on macOS
+    ```
+      /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/avr/include/ (293 files)
+      /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/avr/lib/ (618 files)
+      /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin/avr-c++
+      /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin/avr-cpp
+      /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin/avr-g++
+      /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin/avr-gcc
+      /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin/avr-gcc-9.4.0
+      /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin/avr-gcc-ar
+      /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin/avr-gcc-nm
+      /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin/avr-gcc-ranlib
+      /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin/avr-gcov
+      /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin/avr-gcov-dump
+      /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin/avr-gcov-tool
+      /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin/avr-man
+      /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/lib/avr-gcc/ (791 files)
+      /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/libexec/gcc/ (13 files)
+      /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/sbom.spdx.json
+      /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/share/doc/ (20 files)
+      /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/share/man/ (6 files)
+    ```
+    * `${AVR_ROOT}` would be `/opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/` for this output.
+* If you installed a avr toolchain manually, you need to find the base of your avr toolchain. It has the same directory structure though, and you can find it easily in the place you have extracted the toolchain.
+
+Supposing your avr library base is located at `${AVR_ROOT}`, your IDE needs to 'see' these include directories
+
+* `${AVR_ROOT}/lib/avr-gcc/9/gcc/avr/9.4.0/include`
+* `${AVR_ROOT}/lib/avr-gcc/9/gcc/avr/9.4.0/include-fixed`
+* `${AVR_ROOT}/avr/include`
+
+You need to instruct you IDE to 'see' default header directory
+
+* `${WORKSPACE_DIRECTORY}/include`
+  * `${WORKSPACE_DIRECTORY}` is this project's root directory.
+
+### C Defines
+Depending on your avr device, you need to instruct your IDE to consider some C defines as defined (some with values)
+
+* `__AVR_ATmega328P__`
+  * This is used for io.h header, we are using atmega328p chip on Arduino Uno.
+* `__AVR_DEVICE_NAME__=atmega328p`
+  * This is used for io.h header, we are using atmega328p chip on Arduino Uno. This is only for device name.
+* `F_CPU=16000000L`
+  * This is the default CPU frequency. If you change the CPU frequency,
