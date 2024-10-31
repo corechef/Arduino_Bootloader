@@ -1,7 +1,9 @@
 # Arduino_Bootloader
 A Minimal bootloader implementation for Arduino Uno and Arduino Nano which uses atmega328p chip
 
-## Prerequisites
+## How To Build
+
+### Prerequisites
 * `avr-gcc` package
   * On macOS, install via `brew install avr-gcc`
   * On macOS, learn `${AVR_BIN}` directory via `brew ls avr-gcc`
@@ -63,8 +65,6 @@ A Minimal bootloader implementation for Arduino Uno and Arduino Nano which uses 
     * `${AVR_BINUTIL}` configuration is similar, just point it to the `bin` directory which includes `avr-objdump` executable.
 
 * `make` utility
-
-## How To Build
 You need to add `${AVR_BIN}` and `${AVR_BINUTIL}` to your environment variables first. `AVR_BIN` is supposed to be where `avr-gcc` (and other tools) is located. `AVR_BINUTIL` is supposed to be where `avr-objdump` (and other tools) is located.
 
 Example export directives in `~/.zshrc` on macOS:
