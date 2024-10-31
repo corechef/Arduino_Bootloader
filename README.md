@@ -30,19 +30,71 @@ A Minimal bootloader implementation for Arduino Uno and Arduino Nano which uses 
     * Example `${AVR_BIN}`: `/opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin`
   * Alternatively, you can find an avr toolchain and download it for your environment via a search engine.
     * `${AVR_BIN}` configuration is similar, just point it to the `bin` directory which includes `avr-gcc` executable.
+
+* `avr-binutils` package
+  * On macOS, install via `brew install avr-binutils`
+  * On macOS, learn `${AVR_BINUTIL}` directory via `brew ls avr-binutils`
+    * Example output:
+      ```
+        /opt/homebrew/Cellar/avr-binutils/2.42/avr/bin/ (10 files)
+        /opt/homebrew/Cellar/avr-binutils/2.42/avr/lib/ (121 files)
+        /opt/homebrew/Cellar/avr-binutils/2.42/bin/avr-addr2line
+        /opt/homebrew/Cellar/avr-binutils/2.42/bin/avr-ar
+        /opt/homebrew/Cellar/avr-binutils/2.42/bin/avr-as
+        /opt/homebrew/Cellar/avr-binutils/2.42/bin/avr-c++filt
+        /opt/homebrew/Cellar/avr-binutils/2.42/bin/avr-elfedit
+        /opt/homebrew/Cellar/avr-binutils/2.42/bin/avr-gprof
+        /opt/homebrew/Cellar/avr-binutils/2.42/bin/avr-ld
+        /opt/homebrew/Cellar/avr-binutils/2.42/bin/avr-ld.bfd
+        /opt/homebrew/Cellar/avr-binutils/2.42/bin/avr-nm
+        /opt/homebrew/Cellar/avr-binutils/2.42/bin/avr-objcopy
+        /opt/homebrew/Cellar/avr-binutils/2.42/bin/avr-objdump
+        /opt/homebrew/Cellar/avr-binutils/2.42/bin/avr-ranlib
+        /opt/homebrew/Cellar/avr-binutils/2.42/bin/avr-readelf
+        /opt/homebrew/Cellar/avr-binutils/2.42/bin/avr-size
+        /opt/homebrew/Cellar/avr-binutils/2.42/bin/avr-strings
+        /opt/homebrew/Cellar/avr-binutils/2.42/bin/avr-strip
+        /opt/homebrew/Cellar/avr-binutils/2.42/lib/avr/bfd-plugins/libdep.so
+        /opt/homebrew/Cellar/avr-binutils/2.42/sbom.spdx.json
+        /opt/homebrew/Cellar/avr-binutils/2.42/share/man/ (18 files)
+      ```
+    * Example `${AVR_BINUTIL}`: `/opt/homebrew/Cellar/avr-binutils/2.42/bin`
+  * Alternatively, you can find an avr toolchain and download it for your environment via a search engine.
+    * `${AVR_BINUTIL}` configuration is similar, just point it to the `bin` directory which includes `avr-objdump` executable.
+
 * `make` utility
 
 ## How To Build
-You need to add `${AVR_BIN}` to your environment variables first. `AVR_BIN` is supposed to be where `avr-gcc` (and other tools) are located.
+You need to add `${AVR_BIN}` and `${AVR_BINUTIL}` to your environment variables first. `AVR_BIN` is supposed to be where `avr-gcc` (and other tools) is located. `AVR_BINUTIL` is supposed to be where `avr-objdump` (and other tools) is located.
+
+Example export directives in `~/.zshrc` on macOS:
+```
+export AVR_BIN="/opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin"
+export AVR_BINUTIL="/opt/homebrew/Cellar/avr-binutils/2.42/bin"
+```
+
+After doing this for the first time, you need to source the .rc file like so: `source ~/.zshrc`
 
 ### Compile
 Run `make` for a compiling the binaries. Binaries are .elf and .hex files under `bin` directory.
 
 ### Clean
-Run `make clean` for cleaning artefacts of the build step
+Run `make clean` for cleaning artifacts of the build step.
 
 ### Compile and Disassemble
 Run `make disasm` for compiling the binaries, and producing their objdump files for further inspection.
+
+## How To Burn Bootloader to atmega328p (Arduino Uno/Nano)
+For burning bootloader via usbtinyISP programmer dedicated hardware, use this command: 
+```
+./upload_scripts/upload_bootloader_via_usbtinyISP.sh -c /opt/homebrew/Cellar/avrdude/8.0/.bottle/etc/avrdude.conf -b ./bin/main.hex -p usbtiny
+```
+
+For burning bootloader via arduinoISP programmer, use this command: 
+```
+./upload_scripts/upload_bootloader_via_arduinoISP.sh -c /opt/homebrew/Cellar/avrdude/8.0/.bottle/etc/avrdude.conf -p /dev/cu.usbserial-10 -b ./bin/main.hex
+```
+
 
 ## IDE Configuration
 

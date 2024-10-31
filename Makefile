@@ -7,9 +7,9 @@ DEVICE     = atmega328p
 CLOCK      = 16000000L
 OBJECTS    = $(SRC_DIR)/main.o $(SRC_DIR)/uart.o $(SRC_DIR)/wdt_unsafe.o $(SRC_DIR)/io.o
 AVR_GCC    = $(AVR_BIN)/avr-gcc
-AVR_OBJCPY = $(AVR_BIN)/avr-objcopy
-AVR_SIZE   = $(AVR_BIN)/avr-size
-AVR_OBJDMP = $(AVR_BIN)/avr-objdump
+AVR_OBJCPY = $(AVR_BINUTIL)/avr-objcopy
+AVR_SIZE   = $(AVR_BINUTIL)/avr-size
+AVR_OBJDMP = $(AVR_BINUTIL)/avr-objdump
 
 COMPILE = $(AVR_GCC) -I$(INC_DIR) -Wall -Os -DF_CPU=$(CLOCK) -mmcu=$(DEVICE) -mrelax -nostartfiles
 
