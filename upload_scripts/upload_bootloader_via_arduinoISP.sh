@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Example usage on MacOS:
-# ./upload_bootloader_via_arduinoISP.sh -c /opt/homebrew/Cellar/avrdude/8.0/.bottle/etc/avrdude.conf -p /dev/cu.usbserial-10 -b <path_to_bootloader_hex>
+# ./upload_scripts/upload_bootloader_via_arduinoISP.sh -c /opt/homebrew/Cellar/avrdude/8.0/.bottle/etc/avrdude.conf -p /dev/cu.usbserial-10 -b ./bin/9.4.0/bootloader.hex
 
 # Usage message function
 usage() {

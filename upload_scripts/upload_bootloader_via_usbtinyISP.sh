@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Example usage on MacOS:
-# ./upload_bootloader_via_usbtinyISP.sh -c /opt/homebrew/Cellar/avrdude/8.0/.bottle/etc/avrdude.conf -b ../bootloader_0/main.hex -p usbtiny
+# ./upload_scripts/upload_bootloader_via_usbtinyISP.sh -c /opt/homebrew/Cellar/avrdude/8.0/.bottle/etc/avrdude.conf -b ./bin/9.4.0/bootloader.hex -p usbtiny
 
 # Usage message function
 usage() {
