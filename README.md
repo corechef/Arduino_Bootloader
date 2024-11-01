@@ -5,6 +5,9 @@ A Minimal bootloader implementation for Arduino Uno and Arduino Nano which uses 
 - [Arduino_Bootloader](#arduino_bootloader)
 - [How To Build](#how-to-build)
   - [Prerequisites](#prerequisites)
+    - [avr-gcc](#avr-gcc-package)
+    - [avr-binutils](#avr-binutils-package)
+    - [make](#make-utility)
   - [Compile](#compile)
   - [Clean](#clean)
   - [Compile and Disassemble](#compile-and-disassemble)
@@ -20,7 +23,7 @@ A Minimal bootloader implementation for Arduino Uno and Arduino Nano which uses 
 ## How To Build
 
 ### Prerequisites
-* `avr-gcc` package
+#### `avr-gcc` package
   * On macOS, install via `brew install avr-gcc`
   * On macOS, learn `${AVR_BIN}` directory via `brew ls avr-gcc`
     * <details> <summary>Example output</summary>
@@ -53,7 +56,7 @@ A Minimal bootloader implementation for Arduino Uno and Arduino Nano which uses 
   * Alternatively, you can download an avr toolchain and download it for your environment via a search engine.
     * `${AVR_BIN}` configuration is similar, just point it to the `bin` directory which contains `avr-gcc` executable.
 
-* `avr-binutils` package
+#### `avr-binutils` package
   * On macOS, install via `brew install avr-binutils`
   * On macOS, learn `${AVR_BINUTIL}` directory via `brew ls avr-binutils`
     * <details> <summary>Example output</summary>
@@ -88,7 +91,7 @@ A Minimal bootloader implementation for Arduino Uno and Arduino Nano which uses 
   * Alternatively, you can find an avr toolchain and download it for your environment via a search engine.
     * `${AVR_BINUTIL}` configuration is similar, just point it to the `bin` directory which includes `avr-objdump` executable.
 
-* `make` utility
+#### `make` utility
 You need to add `${AVR_BIN}` and `${AVR_BINUTIL}` to your environment variables first. `AVR_BIN` is supposed to be where `avr-gcc` (and other tools) is located. `AVR_BINUTIL` is supposed to be where `avr-objdump` (and other tools) is located.
 
 Example export directives in `~/.zshrc` on macOS to add `AVR_BIN` and `AVR_BINUTIL` to environment variables:
