@@ -149,7 +149,8 @@ Note that when programming via usbtinyISP, usb port info is not needed.
 Depending on your avr installation you need to instruct your IDE to 'see' avr library headers. Without this, IDEs like VsCode will not help you with the headers and expressions included from avr library in this project.
 
 * on macOS, avr package library base can be found with this command: `brew ls avr-gcc`
-  * example output on macOS
+  * <details> <summary>example output on macOS</summary>
+
     ```
       /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/avr/include/ (293 files)
       /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/avr/lib/ (618 files)
@@ -171,6 +172,8 @@ Depending on your avr installation you need to instruct your IDE to 'see' avr li
       /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/share/doc/ (20 files)
       /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/share/man/ (6 files)
     ```
+  </details>
+  
     * `${AVR_ROOT}` would be `/opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/` for this output.
 * If you installed a avr toolchain manually, you need to find the base of your avr toolchain. It has the same directory structure though, and you can find it easily in the place you have extracted the toolchain.
 
