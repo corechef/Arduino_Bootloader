@@ -7,7 +7,8 @@ A Minimal bootloader implementation for Arduino Uno and Arduino Nano which uses 
 * `avr-gcc` package
   * On macOS, install via `brew install avr-gcc`
   * On macOS, learn `${AVR_BIN}` directory via `brew ls avr-gcc`
-    * Example output:
+    * <details> <summary>Example output</summary>
+     
       ```
         /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/avr/include/ (293 files)
         /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/avr/lib/ (618 files)
@@ -29,6 +30,9 @@ A Minimal bootloader implementation for Arduino Uno and Arduino Nano which uses 
         /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/share/doc/ (20 files)
         /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/share/man/ (6 files)
       ```
+      
+    </details>
+    
     * Example `${AVR_BIN}`: `/opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin`
   * Alternatively, you can download an avr toolchain and download it for your environment via a search engine.
     * `${AVR_BIN}` configuration is similar, just point it to the `bin` directory which contains `avr-gcc` executable.
@@ -36,7 +40,8 @@ A Minimal bootloader implementation for Arduino Uno and Arduino Nano which uses 
 * `avr-binutils` package
   * On macOS, install via `brew install avr-binutils`
   * On macOS, learn `${AVR_BINUTIL}` directory via `brew ls avr-binutils`
-    * Example output:
+    * <details> <summary>Example output</summary>
+     
       ```
         /opt/homebrew/Cellar/avr-binutils/2.42/avr/bin/ (10 files)
         /opt/homebrew/Cellar/avr-binutils/2.42/avr/lib/ (121 files)
@@ -60,6 +65,9 @@ A Minimal bootloader implementation for Arduino Uno and Arduino Nano which uses 
         /opt/homebrew/Cellar/avr-binutils/2.42/sbom.spdx.json
         /opt/homebrew/Cellar/avr-binutils/2.42/share/man/ (18 files)
       ```
+      
+    </details>
+    
     * Example `${AVR_BINUTIL}`: `/opt/homebrew/Cellar/avr-binutils/2.42/bin`
   * Alternatively, you can find an avr toolchain and download it for your environment via a search engine.
     * `${AVR_BINUTIL}` configuration is similar, just point it to the `bin` directory which includes `avr-objdump` executable.
@@ -90,21 +98,26 @@ Run `make disasm` for compiling the binaries, and producing their objdump files 
 #### `avrdude` package
   * On macOS, install via `brew install avrdude`
   * On macOS, learn location of `avrdude.conf` file via `brew ls avrdude`
-    * Example output:
-    ```
-      /opt/homebrew/Cellar/avrdude/8.0/.bottle/etc/avrdude.conf
-      /opt/homebrew/Cellar/avrdude/8.0/bin/avrdude
-      /opt/homebrew/Cellar/avrdude/8.0/bin/elf2tag
-      /opt/homebrew/Cellar/avrdude/8.0/include/ (2 files)
-      /opt/homebrew/Cellar/avrdude/8.0/lib/libavrdude.2.0.0.dylib
-      /opt/homebrew/Cellar/avrdude/8.0/lib/ (3 other files)
-      /opt/homebrew/Cellar/avrdude/8.0/sbom.spdx.json
-      /opt/homebrew/Cellar/avrdude/8.0/share/man/man1/avrdude.1
-    ```
+   <details> <summary>Example output</summary>
+    
+   ```
+    /opt/homebrew/Cellar/avrdude/8.0/.bottle/etc/avrdude.conf
+    /opt/homebrew/Cellar/avrdude/8.0/bin/avrdude
+    /opt/homebrew/Cellar/avrdude/8.0/bin/elf2tag
+    /opt/homebrew/Cellar/avrdude/8.0/include/ (2 files)
+    /opt/homebrew/Cellar/avrdude/8.0/lib/libavrdude.2.0.0.dylib
+    /opt/homebrew/Cellar/avrdude/8.0/lib/ (3 other files)
+    /opt/homebrew/Cellar/avrdude/8.0/sbom.spdx.json
+    /opt/homebrew/Cellar/avrdude/8.0/share/man/man1/avrdude.1
+   ```
+    
+   </details>
 
+   * Config file we are interested in is `/opt/homebrew/Cellar/avrdude/8.0/.bottle/etc/avrdude.conf` in this case.
+    
 #### Arduino Must Be Plugged Into a USB port
   * On macOS, run `ls /dev/* | grep "usb"` when Arduino is not plugged.
-    * Then plug the Arduino run `ls /dev/* | grep "usb"` again.
+    * Then plug the Arduino run `ls /dev/* | grep "usb"` again. You can deduce the arduino usb port by the difference in the output
     * Example output:
     ```
       /dev/cu.usbserial-10
