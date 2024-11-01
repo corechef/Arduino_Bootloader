@@ -35,4 +35,4 @@ $(BIN_DIR)/main.hex.dump: $(BIN_DIR)/main.hex
 	$(AVR_OBJDMP) -D -s -m avr5 --no-addresses --no-show-raw-insn $(BIN_DIR)/main.hex > $(BIN_DIR)/main.hex.dump
 
 $(BIN_DIR)/main.elf.dump: $(BIN_DIR)/main.elf
-	$(AVR_OBJDMP) -D -j .text -m avr5 --no-addresses --no-show-raw-insn $(BIN_DIR)/main.elf > $(BIN_DIR)/main.elf.dump
+	$(AVR_OBJDMP) -D -s -m avr5 --no-addresses --no-show-raw-insn $(BIN_DIR)/main.elf > $(BIN_DIR)/main.elf.dump
