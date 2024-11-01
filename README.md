@@ -30,8 +30,8 @@ A Minimal bootloader implementation for Arduino Uno and Arduino Nano which uses 
         /opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/share/man/ (6 files)
       ```
     * Example `${AVR_BIN}`: `/opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin`
-  * Alternatively, you can find an avr toolchain and download it for your environment via a search engine.
-    * `${AVR_BIN}` configuration is similar, just point it to the `bin` directory which includes `avr-gcc` executable.
+  * Alternatively, you can download an avr toolchain and download it for your environment via a search engine.
+    * `${AVR_BIN}` configuration is similar, just point it to the `bin` directory which contains `avr-gcc` executable.
 
 * `avr-binutils` package
   * On macOS, install via `brew install avr-binutils`
@@ -67,13 +67,13 @@ A Minimal bootloader implementation for Arduino Uno and Arduino Nano which uses 
 * `make` utility
 You need to add `${AVR_BIN}` and `${AVR_BINUTIL}` to your environment variables first. `AVR_BIN` is supposed to be where `avr-gcc` (and other tools) is located. `AVR_BINUTIL` is supposed to be where `avr-objdump` (and other tools) is located.
 
-Example export directives in `~/.zshrc` on macOS:
+Example export directives in `~/.zshrc` on macOS to add `AVR_BIN` and `AVR_BINUTIL` to environment variables:
 ```
 export AVR_BIN="/opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin"
 export AVR_BINUTIL="/opt/homebrew/Cellar/avr-binutils/2.42/bin"
 ```
 
-After doing this for the first time, you need to source the .rc file like so: `source ~/.zshrc`
+After doing this for the first time, you need to reset shell, or run this, so that shell registers the new variables: `source ~/.zshrc`
 
 ### Compile
 Run `make` for a compiling the binaries. Binaries are .elf and .hex files under `bin` directory.
@@ -85,16 +85,50 @@ Run `make clean` for cleaning artifacts of the build step.
 Run `make disasm` for compiling the binaries, and producing their objdump files for further inspection.
 
 ## How To Burn Bootloader to atmega328p (Arduino Uno/Nano)
-For burning bootloader via usbtinyISP programmer dedicated hardware, use this command: 
+### Prerequisites
+
+#### `avrdude` package
+  * On macOS, install via `brew install avrdude`
+  * On macOS, learn location of `avrdude.conf` file via `brew ls avrdude`
+    * Example output:
+    ```
+      /opt/homebrew/Cellar/avrdude/8.0/.bottle/etc/avrdude.conf
+      /opt/homebrew/Cellar/avrdude/8.0/bin/avrdude
+      /opt/homebrew/Cellar/avrdude/8.0/bin/elf2tag
+      /opt/homebrew/Cellar/avrdude/8.0/include/ (2 files)
+      /opt/homebrew/Cellar/avrdude/8.0/lib/libavrdude.2.0.0.dylib
+      /opt/homebrew/Cellar/avrdude/8.0/lib/ (3 other files)
+      /opt/homebrew/Cellar/avrdude/8.0/sbom.spdx.json
+      /opt/homebrew/Cellar/avrdude/8.0/share/man/man1/avrdude.1
+    ```
+
+#### Arduino Must Be Plugged Into a USB port
+  * On macOS, run `ls /dev/* | grep "usb"` when Arduino is not plugged.
+    * Then plug the Arduino run `ls /dev/* | grep "usb"` again.
+    * Example output:
+    ```
+      /dev/cu.usbserial-10
+      /dev/tty.usbserial-10
+    ```
+    * This means we can use `/dev/cu.usbserial-10` for usb programming device parameter.
+
+### Uploading Program
+
+#### Burning bootloader via usbtinyISP programmer dedicated hardware, use this command: 
 ```
-./upload_scripts/upload_bootloader_via_usbtinyISP.sh -c /opt/homebrew/Cellar/avrdude/8.0/.bottle/etc/avrdude.conf -b ./bin/main.hex -p usbtiny
+./upload_scripts/upload_bootloader_via_usbtinyISP.sh -c /opt/homebrew/Cellar/avrdude/8.0/.bottle/etc/avrdude.conf -b ./bin/9.4.0/bootloader.hex -p usbtiny
+```
+Note that when programming via usbtinyISP, usb port info is not needed.
+
+#### Burning bootloader via arduinoISP programmer, use this command: 
+```
+./upload_scripts/upload_bootloader_via_arduinoISP.sh -c /opt/homebrew/Cellar/avrdude/8.0/.bottle/etc/avrdude.conf -p /dev/cu.usbserial-10 -b ./bin/9.4.0/bootloader.hex
 ```
 
-For burning bootloader via arduinoISP programmer, use this command: 
+#### Uploading a hex file, use this command:
 ```
-./upload_scripts/upload_bootloader_via_arduinoISP.sh -c /opt/homebrew/Cellar/avrdude/8.0/.bottle/etc/avrdude.conf -p /dev/cu.usbserial-10 -b ./bin/main.hex
+./upload_scripts/upload_hex_via_usb.sh -c /opt/homebrew/Cellar/avrdude/8.0/.bottle/etc/avrdude.conf -p /dev/cu.usbserial-10 -h ./bin/main.hex
 ```
-
 
 ## IDE Configuration
 

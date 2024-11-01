@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Example usage on MacOS
-# ./upload_scripts/upload_hex_via_usb.sh -c /opt/homebrew/Cellar/avrdude/8.0/.bottle/etc/avrdude.conf -p /dev/cu.usbserial-10 -h ./bin/9.4.0/bootloader.hex
+# ./upload_scripts/upload_hex_via_usb.sh -c /opt/homebrew/Cellar/avrdude/8.0/.bottle/etc/avrdude.conf -p /dev/cu.usbserial-10 -h ./bin/main.hex
 
 # Usage message function
 usage() {
