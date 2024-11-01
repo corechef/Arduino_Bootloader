@@ -133,15 +133,33 @@ Run `make disasm` for compiling the binaries, and producing their objdump files 
 ```
 Note that when programming via usbtinyISP, usb port info is not needed.
 
+<details><summary>Wiring</summary>
+ 
+ ![WhatsApp Image 2024-11-01 at 23 01 16](https://github.com/user-attachments/assets/5583627a-686c-4b36-a4d6-175ae6b8d30a)
+ 
+</details>
+
 #### Burning bootloader via arduinoISP programmer, use this command: 
 ```
 ./upload_scripts/upload_bootloader_via_arduinoISP.sh -c /opt/homebrew/Cellar/avrdude/8.0/.bottle/etc/avrdude.conf -p /dev/cu.usbserial-10 -b ./bin/9.4.0/bootloader.hex
 ```
 
+<details><summary>Wiring</summary>
+ 
+[See here](https://docs.arduino.cc/built-in-examples/arduino-isp/ArduinoISP/)
+
+</details>
+
 #### Uploading a hex file, use this command:
 ```
 ./upload_scripts/upload_hex_via_usb.sh -c /opt/homebrew/Cellar/avrdude/8.0/.bottle/etc/avrdude.conf -p /dev/cu.usbserial-10 -h ./bin/main.hex
 ```
+
+<details><summary>Wiring</summary>
+
+![WhatsApp Image 2024-11-01 at 23 01 37](https://github.com/user-attachments/assets/4d736bab-4700-41a3-a6e2-76cb2742aef6)
+
+</details>
 
 ## IDE Configuration
 
