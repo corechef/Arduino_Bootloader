@@ -1,6 +1,22 @@
 # Arduino_Bootloader
 A Minimal bootloader implementation for Arduino Uno and Arduino Nano which uses atmega328p chip
 
+# Table of Contents
+- [Arduino_Bootloader](#arduino_bootloader)
+- [How To Build](#how-to-build)
+  - [Prerequisites](#prerequisites)
+  - [Compile](#compile)
+  - [Clean](#clean)
+  - [Compile and Disassemble](#compile-and-disassemble)
+- [How To Burn Bootloader to atmega328p (Arduino Uno/Nano)](#how-to-burn-bootloader-to-atmega328p-arduino-unonano)
+  - [Prerequisites](#prerequisites-1)
+    - [`avrdude` package](#avrdude-package)
+    - [Arduino Must Be Plugged Into a USB port](#arduino-must-be-plugged-into-a-usb-port)
+  - [Uploading Program](#uploading-program)
+- [IDE Configuration](#ide-configuration)
+  - [Include Directory](#include-directory)
+  - [C Defines](#c-defines)
+
 ## How To Build
 
 ### Prerequisites
