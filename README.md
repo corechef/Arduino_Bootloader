@@ -235,7 +235,7 @@ Depending on your avr device, you need to instruct your IDE to consider some C d
 * `F_CPU=16000000L`
   * This is the default CPU frequency. If you change the CPU frequency,
 
-### Generating compile_comamnds.json
+### Generating compile_commands.json
 
 ```
 make clean && CC=$AVR_BIN/avr-gcc bear -- make
