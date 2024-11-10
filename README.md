@@ -240,3 +240,24 @@ Depending on your avr device, you need to instruct your IDE to consider some C d
 ```
 make clean && CC=$AVR_BIN/avr-gcc bear -- make
 ```
+
+### When Using Clangd, Add these settings to `settings.json` on VsCode
+```
+  "clangd.arguments": [
+    "--compile-commands-dir=<path_to_your_project_root>",
+    "--query-driver=<your_avr_library_installation_bin_folder>/avr-gcc"
+  ]
+```
+
+First line will help clangd to find you compile_commands.json so it knows how your project is supposed to be built.
+
+Second line will help it ascertain the system libraries your avr-gcc compiler lets you use. (Like `#include <avr/io.h>`
+
+If not using vscode, this just corresponds to passing clangd these arguments as you can probably tell.
+
+### When Using Clangd Extension on VsCode
+Make sure you use the latest installation of `clangd` from your llvm installment. You may have a default, older `clangd` and it will lack some features.
+
+This can be done on extension settings:
+<img width="352" alt="Screenshot 2024-11-10 at 22 43 25" src="https://github.com/user-attachments/assets/8819da06-c39f-408d-83ce-3f0a42c6e397">
+
