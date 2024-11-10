@@ -1,0 +1,23 @@
+[
+    {
+        "directory": "/Users/sefikpalazoglu/Desktop/corechef_repos/Arduino_Bootloader",
+        "arguments": [
+            "/opt/homebrew/Cellar/avr-gcc@9/9.4.0_1/bin/avr-gcc",
+            "-Iinclude",
+            "-Wall",
+            "-Os",
+            "-DF_CPU=16000000L",
+            "-mmcu=atmega328p",
+            "-mrelax",
+            "-nostartfiles",
+            "-MP",
+            "-MD",
+            "-flto",
+            "-c",
+            "src/main.c",
+            "-o",
+            "src/main.o"
+        ],
+        "file": "src/main.c"
+    }
+]
