@@ -31,7 +31,7 @@ clean:
 	rm -f $(DEPFILES) $(BIN_DIR)/main.hex $(BIN_DIR)/main.elf $(BIN_DIR)/main.hex.dump $(BIN_DIR)/main.elf.dump $(OBJECTS)
 
 $(BIN_DIR)/main.elf: $(OBJECTS)
-	$(CC) -mrelax -flto -nostartfiles -Wl,-T $(LNK_DIR)/linker.ld -Wl,--section-start=.text=0x7E00 -o $(BIN_DIR)/main.elf $(OBJECTS)
+	$(CC) -mrelax -nostartfiles -Wl,-T $(LNK_DIR)/linker.ld -Wl,--section-start=.text=0x7E00 -o $(BIN_DIR)/main.elf $(OBJECTS)
 
 $(BIN_DIR)/main.hex: $(BIN_DIR)/main.elf
 	rm -f bin/main.hex
