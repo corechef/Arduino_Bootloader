@@ -103,13 +103,13 @@ export AVR_BINUTIL="/opt/homebrew/Cellar/avr-binutils/2.42/bin"
 After doing this for the first time, you need to reset shell, or run this, so that shell registers the new variables: `source ~/.zshrc`
 
 ### Compile
-Run `make` for a compiling the binaries. Binaries are .elf and .hex files under `bin` directory.
+Run `CC=$AVR_BIN/avr-gcc make` for a compiling the binaries. Binaries are .elf and .hex files under `bin` directory.
 
 ### Clean
 Run `make clean` for cleaning artifacts of the build step.
 
 ### Compile and Disassemble
-Run `make disasm` for compiling the binaries, and producing their objdump files for further inspection.
+Run `CC=$AVR_BIN/avr-gcc make disasm` for compiling the binaries, and producing their objdump files for further inspection.
 
 ## How To Burn Bootloader to atmega328p (Arduino Uno/Nano)
 ### Prerequisites
@@ -234,3 +234,9 @@ Depending on your avr device, you need to instruct your IDE to consider some C d
   * This is used for io.h header, we are using atmega328p chip on Arduino Uno. This is only for device name.
 * `F_CPU=16000000L`
   * This is the default CPU frequency. If you change the CPU frequency,
+
+### Generating compile_commands.json
+
+```
+make clean && CC=$AVR_BIN/avr-gcc bear -- make
+```
