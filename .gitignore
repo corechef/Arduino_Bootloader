@@ -57,3 +57,4 @@ dkms.conf
 # IDE Configurations
 .vscode/*
 .cache/*
+compile_commands.json
