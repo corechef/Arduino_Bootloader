@@ -238,5 +238,5 @@ Depending on your avr device, you need to instruct your IDE to consider some C d
 ### Generating compile_comamnds.json
 
 ```
-make clean && CC=$AVR_BIN/avr-gcc bear --force-wrapper --config ./bear_config.json --verbose -- make
+make clean && CC=$AVR_BIN/avr-gcc bear --verbose -- make
 ```
