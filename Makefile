@@ -14,28 +14,28 @@ LNK_OPT=-mrelax -nostartfiles
 DEPFLAGS=-MP -MD
 DEFINE_FLAGS=-DF_CPU=$(CLOCK) -mmcu=$(DEVICE)
 
-CFLAGS=-Wall $(foreach D,$(INC_DIRS),-I$(D)) $(OPT) $(DEPFLAGS) $(DEFINE_FLAGS)
+CFLAGS=-Wall $(foreach DIR,$(INC_DIRS),-I$(DIR)) $(OPT) $(DEPFLAGS) $(DEFINE_FLAGS)
 
-CFILES=$(foreach D,$(CODE_DIRS),$(wildcard $(D)/*.c))
+CFILES=$(foreach DIR,$(CODE_DIRS),$(wildcard $(DIR)/*.c))
 
 OBJECTS=$(patsubst %.c,%.o,$(CFILES))
 DEPFILES=$(patsubst %.c,%.d,$(CFILES))
 
-all:	$(BIN_DIR)/main.hex
+all: $(BIN_DIR)/main.hex
+
+$(BIN_DIR)/main.hex: $(BIN_DIR)/main.elf
+	rm -f bin/main.hex
+	$(AVR_OBJCPY) -j .text -j .data -O ihex $(BIN_DIR)/main.elf $(BIN_DIR)/main.hex
+	$(AVR_SIZE) bin/main.elf
+
+$(BIN_DIR)/main.elf: $(OBJECTS)
+	$(CC) $(LNK_OPT) -Wl,-T $(LNK_DIR)/linker.ld -Wl,--section-start=.text=0x7E00 -o $(BIN_DIR)/main.elf $(OBJECTS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
 	rm -f $(DEPFILES) $(BIN_DIR)/main.hex $(BIN_DIR)/main.elf $(BIN_DIR)/main.hex.dump $(BIN_DIR)/main.elf.dump $(OBJECTS)
-
-$(BIN_DIR)/main.elf: $(OBJECTS)
-	$(CC) $(LNK_OPT) -Wl,-T $(LNK_DIR)/linker.ld -Wl,--section-start=.text=0x7E00 -o $(BIN_DIR)/main.elf $(OBJECTS)
-
-$(BIN_DIR)/main.hex: $(BIN_DIR)/main.elf
-	rm -f bin/main.hex
-	$(AVR_OBJCPY) -j .text -j .data -O ihex $(BIN_DIR)/main.elf $(BIN_DIR)/main.hex
-	$(AVR_SIZE) bin/main.elf
 
 disasm:	$(BIN_DIR)/main.hex.dump $(BIN_DIR)/main.elf.dump
 
