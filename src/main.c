@@ -1,5 +1,6 @@
 #include <avr/pgmspace.h>
 #include "io.h"
+#include "optional.h"
 #include "small_boot.h"
 #include "uart.h"
 #include "command.h"
@@ -14,6 +15,7 @@ __attribute__ ((section(".text.my_bootloader")))
 void bootloader_func(void)
 {
   asm volatile ("eor r1, r1");
+  optional_func();
   uint8_t mcusr = read_and_zero_mcusr();
   uint16_t cursor;
 
