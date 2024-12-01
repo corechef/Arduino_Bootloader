@@ -21,6 +21,8 @@ CFILES=$(foreach DIR,$(CODE_DIRS),$(wildcard $(DIR)/*.c))
 OBJECTS=$(patsubst %.c,%.o,$(CFILES))
 DEPFILES=$(patsubst %.c,%.d,$(CFILES))
 
+DUMPS=$(patsubst %.o,%.dump,$(OBJECTS))
+
 all: $(BIN_DIR)/main.hex
 
 $(BIN_DIR)/main.hex: $(BIN_DIR)/main.elf
@@ -35,14 +37,17 @@ $(BIN_DIR)/main.elf: $(OBJECTS)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
-	rm -f $(DEPFILES) $(BIN_DIR)/main.hex $(BIN_DIR)/main.elf $(BIN_DIR)/main.hex.dump $(BIN_DIR)/main.elf.dump $(OBJECTS)
+	rm -f $(DEPFILES) $(BIN_DIR)/main.hex $(BIN_DIR)/main.elf $(BIN_DIR)/main.hex.dump $(BIN_DIR)/main.elf.dump $(OBJECTS) $(DUMPS)
 
-disasm:	$(BIN_DIR)/main.hex.dump $(BIN_DIR)/main.elf.dump
+disasm:	$(BIN_DIR)/main.hex.dump $(BIN_DIR)/main.elf.dump $(DUMPS)
 
 $(BIN_DIR)/main.hex.dump: $(BIN_DIR)/main.hex
-	$(AVR_OBJDMP) -D -s -m avr5 --no-addresses --no-show-raw-insn $(BIN_DIR)/main.hex > $(BIN_DIR)/main.hex.dump
+	$(AVR_OBJDMP) -D -s -m avr5 $(BIN_DIR)/main.hex > $(BIN_DIR)/main.hex.dump
 
 $(BIN_DIR)/main.elf.dump: $(BIN_DIR)/main.elf
-	$(AVR_OBJDMP) -D -s -m avr5 --no-addresses --no-show-raw-insn $(BIN_DIR)/main.elf > $(BIN_DIR)/main.elf.dump
+	$(AVR_OBJDMP) -D -s -m avr5 $(BIN_DIR)/main.elf > $(BIN_DIR)/main.elf.dump
+
+%.dump: %.o
+	$(AVR_OBJDMP) -D -s -m avr5 $< > $@
 
 -include $(DEPFILES)
