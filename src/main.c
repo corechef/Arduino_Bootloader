@@ -11,8 +11,8 @@ void synchronize_with_stk500();
 void Read_N_Characters(uint8_t count);
 
 __attribute__ ((used))
-__attribute__ ((section(".text.my_bootloader")))
-void bootloader_func(void)
+__attribute__ ((section(".bootloader_init")))
+void bootloader_init(void)
 {
   asm volatile ("eor r1, r1");
   optional_func();

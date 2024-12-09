@@ -28,7 +28,7 @@ SECTIONS
 {
   .text   :
   {
-    *(.text.my_bootloader)
+    *(.bootloader_init)
     . = ALIGN(2);
     *(.text)
     . = ALIGN(2);
