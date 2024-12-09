@@ -1,7 +1,7 @@
 #include <avr/io.h>
 #include "io.h"
 
-uint8_t* ram_buffer = (uint8_t*) RAMSTART;
+__attribute__((section(".noinit"))) uint8_t ram_buffer[RAMSTART];
 
 uint8_t read_and_zero_mcusr(void)
 {
