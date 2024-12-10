@@ -31,7 +31,7 @@ $(BIN_DIR)/main.hex: $(BIN_DIR)/main.elf
 	$(AVR_SIZE) bin/main.elf
 
 $(BIN_DIR)/main.elf: $(OBJECTS)
-	$(CC) $(LNK_OPT) -Wl,-T $(LNK_DIR)/linker.ld -Wl,--section-start=.text=0x7E00 -o $(BIN_DIR)/main.elf $(OBJECTS)
+	$(CC) $(LNK_OPT) -Wl,-T$(LNK_DIR)/linker.ld -Wl,--section-start=.text=0x7E00 -o $(BIN_DIR)/main.elf $(OBJECTS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
