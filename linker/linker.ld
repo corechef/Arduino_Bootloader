@@ -11,7 +11,7 @@ INCLUDE linker/memory.ld
 
 SECTIONS
 {
-  .text   :
+  .text __bootloader_start__ :
   {
     *(.bootloader_init)
     . = ALIGN(2);
