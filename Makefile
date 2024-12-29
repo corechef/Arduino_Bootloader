@@ -25,14 +25,17 @@ DUMPS=$(patsubst %.o,%.dump,$(OBJECTS))
 
 all: $(BIN_DIR)/main.hex
 
+# Extracts .hex file from .elf file
 $(BIN_DIR)/main.hex: $(BIN_DIR)/main.elf
 	rm -f bin/main.hex
 	$(AVR_OBJCPY) -j .text -j .data -O ihex $(BIN_DIR)/main.elf $(BIN_DIR)/main.hex
 	$(AVR_SIZE) bin/main.elf
 
+# Linking Stage
 $(BIN_DIR)/main.elf: $(OBJECTS)
-	$(CC) $(LNK_OPT) -Wl,-T$(LNK_DIR)/linker.ld -o $(BIN_DIR)/main.elf $(OBJECTS)
+	$(CC) $(DEFINE_FLAGS) $(LNK_OPT) -Wl,-T$(LNK_DIR)/linker.ld -o $(BIN_DIR)/main.elf $(OBJECTS)
 
+# Compilation Stage
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
